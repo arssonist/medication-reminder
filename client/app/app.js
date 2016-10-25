@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('medicationReminderApp', [
+var app = angular.module('medicationReminderApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
@@ -15,23 +15,10 @@ angular.module('medicationReminderApp', [
     $locationProvider.html5Mode(true);
   });
 
+// /Calendar controller in here for now
+  app.controller('CalenderContoller',function($scope){
 
-  medicationReminderApp.controller('CalenderContoller',function($scope){
-    {
-
-   var date = new Date();
-   var d = date.getDate();
-   var m = date.getMonth();
-   var y = date.getFullYear();
-   var currentView = "month";
+    console.log(uiCalenderConfig)
 
 
-   //event source that pulls from google.com
-   $scope.eventSource = {
-           url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-           className: 'gcal-event',           // an option!
-           currentTimezone: 'America/Chicago' // an option!
-   };
-
-     };
-  })();
+  });

@@ -8,13 +8,17 @@
 
 
 <div class="container">
-  <div ui-calendar ng-model="eventSources"></div>
-  
+
+    <div ui-calendar="uiConfig.calendar" ng-model="eventSources">
+  </div>
 </div>
+
 <div class="container">
   <div class="row">
     <div class="col-lg-6 col-lg-offset-3 text-center">
-        <div ng-repeat="m in meds">
+      <div input = time ng-model='med'>{{ med }}</div>
+
+        <div ng-repeat="m in meds" class="meds-show">
             {{m.time}} {{m.name}} {{m.dosage}}
         </div>
     </div>
