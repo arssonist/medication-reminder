@@ -5,19 +5,22 @@ angular.module('medicationReminderApp').controller('MainCtrl', function ($scope,
     var start = moment().format('MM/DD/YYYY'),
         end = moment().add(1, 'day').format('MM/DD/YYYY');
 
-      $http.get('/api/medications?start=' + start + '&end=' + end).then(function (meds) {
-            for ( var i = 0, x = meds.data.length; i < x; i++ ) {
-                var med = meds.data[i];
+// loop through all meds and try to change properties so that they might display on the page as like preloaded ones did
+        $http.get('/api/medications?start=' + start + '&end=' + end).then(function (meds) {
+          for ( var i = 0, x = meds.data.length; i < x; i++ ) {
+          var med = meds.data[i];
 
                 med.start = med.time;
-            }
+                med.title = med.name;
+          }
 
-            $scope.meds = meds.data;
-            console.log(meds.data)
-        });
+                $scope.meds = meds.data;
+                console.log(meds.data)
+            });
 
-    // console.log(meds.data)
-    // $scope.
+        // console.log(meds.data)
+        // $scope.
+
 
     $window.setInterval(function () {
         $scope.currentTime = moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -27,7 +30,7 @@ angular.module('medicationReminderApp').controller('MainCtrl', function ($scope,
 // calender controller moved here
 // *------------------------------------------------------------------*
 
-  console.log(uiCalendarConfig)
+  // console.log(uiCalendarConfig)
 
     var date = new Date();
     var d = date.getDate();
@@ -35,7 +38,7 @@ angular.module('medicationReminderApp').controller('MainCtrl', function ($scope,
     var y = date.getFullYear();
     var currentView = "month";
 
-
+// preloaded events from calendar
     //event source that pulls from google.com
     $scope.eventSource = [
       {title: 'All Day Event',start: new Date(y, m, 1)},
@@ -46,8 +49,10 @@ angular.module('medicationReminderApp').controller('MainCtrl', function ($scope,
       {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
     ];
 
+// empty array maybe possibly necessary?
     $scope.eventSources = [];
 
+// create a function to use for events
     $scope.myFunction = function(){
       console.log('test');
     }
